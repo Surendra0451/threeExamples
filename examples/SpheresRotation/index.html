@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="../../js/three.min.js"></script>
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			
+			var renderer = new THREE.WebGLRenderer();
+			
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			var geometry1 = new THREE.SphereGeometry(30, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+			var material1 = new THREE.MeshNormalMaterial({wireframe:true});
+			var sphere1 = new THREE.Mesh( geometry1, material1 );
+			scene.add( sphere1 );
+			
+			var geometry2 = new THREE.SphereGeometry(25, 40, 40, 0, Math.PI * 2, 0, Math.PI * 2);
+			var material2 = new THREE.MeshBasicMaterial({color:'#e0e0e0', wireframe:true});
+			var sphere2 = new THREE.Mesh( geometry2, material2 );
+			scene.add( sphere2 );
+			
+			var geometry3 = new THREE.SphereGeometry(20, 30, 30, 0, Math.PI * 2, 0, Math.PI * 2);
+			var material3 = new THREE.MeshNormalMaterial({wireframe:true});
+			var sphere3 = new THREE.Mesh( geometry3, material3 );
+			scene.add( sphere3 );
+			
+			camera.position.z = 100;
+			
+			function render() {
+				requestAnimationFrame(render);
+				
+				sphere1.rotation.y += 0.01;
+				sphere2.rotation.x += 0.01;
+				sphere3.rotation.y += 0.01;
+				
+				renderer.render(scene, camera);
+			}
+			render();
+			//console.log(camera);
+		</script>
+	</body>
+</html>
